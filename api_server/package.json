@@ -1,0 +1,27 @@
+{
+  "name": "spill_the_tea",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/odysseywilson/cs492-final-project.git"
+  },
+  "keywords": [
+    "server"
+  ],
+  "author": "Xander Baird-Appleton & Odyssey Wilson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/odysseywilson/cs492-final-project/issues"
+  },
+  "homepage": "https://github.com/odysseywilson/cs492-final-project#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "sqlite3": "^5.0.2"
+  }
+}
