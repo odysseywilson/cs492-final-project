@@ -2,6 +2,9 @@
 node_modules
 package-lock.json
 
+# Database stuff
+*.db
+
 # Built application files
 *.apk
 *.aar
