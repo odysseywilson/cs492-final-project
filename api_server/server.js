@@ -58,8 +58,12 @@ app.post("/api/tea", upload.single("file"), function (req, res, next) {
                     fs.writeFile(file, req.file.buffer, function (err) {
                         if (err) {
                             console.error(err);
+                            query2 = `DELETE FROM Posts WHERE id = ?`;
+                            // delete row in db if file save fails
+                            database.query(query2, null, [
+                                rows[0]["last_insert_rowid()"],
+                            ]);
                             res.status(500).send("INTERNAL SERVER ERROR");
-                            // TODO handle errors
                         } else {
                             res.status(201).end();
                         }
