@@ -1,10 +1,11 @@
 const express = require("express");
-const fs = require("fs"); const multer = require("multer");
+const fs = require("fs");
+const multer = require("multer");
 const database = require("./components/database");
 
 var app = express();
 var storage = multer.memoryStorage();
-var upload = multer({storage: storage});
+var upload = multer({ storage: storage });
 
 app.use(express.static(__dirname + "/public"));
 
@@ -46,8 +47,7 @@ app.post("/api/tea", upload.single("file"), function (req, res, next) {
             } else {
                 query1 = `SELECT last_insert_rowid();`;
                 database.query(query1, function (err, rows) {
-                    if(err)
-                    {
+                    if (err) {
                         res.status(500).send("INTERNAL SERVER ERROR");
                     }
                     var file =
@@ -58,7 +58,7 @@ app.post("/api/tea", upload.single("file"), function (req, res, next) {
                     fs.writeFile(file, req.file.buffer, function (err) {
                         if (err) {
                             console.error(err);
-                        res.status(500).send("INTERNAL SERVER ERROR");
+                            res.status(500).send("INTERNAL SERVER ERROR");
                             // TODO handle errors
                         } else {
                             res.status(201).end();
