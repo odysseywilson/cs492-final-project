@@ -1,6 +1,7 @@
 # NodeJS stuff
 node_modules
 package-lock.json
+api_server/public/*
 
 # Database stuff
 *.db
