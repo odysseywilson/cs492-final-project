@@ -1,6 +1,7 @@
 package com.example.spillthetea;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import android.content.Intent;
 import android.hardware.Camera;
@@ -67,9 +68,15 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("TEST");
             System.out.println(pictureFile);
 
+            String uri = FileProvider.getUriForFile(MainActivity.this,
+                    BuildConfig.APPLICATION_ID + ".provider",
+                    pictureFile).toString();
+
+            Log.i("FILE URI", uri);
+
             //Open TeaPreview intent with new photo
-            Intent intent = new Intent(getBaseContext(), PreviewTea.class);
-            intent.putExtra("EXTRA_TEA_PREVIEW_PATH", pictureFile.getAbsolutePath());
+            Intent intent = new Intent(getBaseContext(), PreviewTeaActivity.class);
+            intent.putExtra("EXTRA_TEA_PREVIEW_PATH", uri);
             startActivity(intent);
 
             if (pictureFile == null) {
@@ -91,10 +98,10 @@ public class MainActivity extends AppCompatActivity {
         File mediaStorageDir = new File(
                 Environment
                         .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-                "MyCameraApp");
+                "SpillTheTea");
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
-                Log.d("MyCameraApp", "failed to create directory");
+                Log.d("SpillTheTea", "failed to create directory");
                 return null;
             }
         }
