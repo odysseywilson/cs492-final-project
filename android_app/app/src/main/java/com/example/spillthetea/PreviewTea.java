@@ -81,13 +81,27 @@ public class PreviewTea extends AppCompatActivity {
                 snapchatIntent.putExtra(Intent.EXTRA_STREAM, imageFilePath);
                 startActivity(Intent.createChooser(snapchatIntent, "Open Snapchat"));
             }*/
-                Intent intent = new Intent();
+                /*Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_SEND);
                 intent.setType("image/*");
                 intent.setPackage("com.snapchat.android");
                 intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 intent.putExtra(Intent.EXTRA_STREAM, imageFilePath);
                 startActivity(Intent.createChooser(intent, "Share Snapchat"));
+            }*/
+
+               /* Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+
+                intent.setDataAndType(imageFilePath, "image/*");
+                startActivity(intent);*/
+
+                Intent sendIntent = new Intent(Intent.ACTION_SEND);
+                sendIntent.putExtra("sms_body", "some text");
+                sendIntent.putExtra(Intent.EXTRA_STREAM, imageFilePath);
+                sendIntent.setType("image/png");
+                startActivity(Intent.createChooser(sendIntent,"Send"));
+
             }
         });
 
