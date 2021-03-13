@@ -72,8 +72,10 @@ public class MainActivity extends AppCompatActivity {
                     BuildConfig.APPLICATION_ID + ".provider",
                     pictureFile).toString();
 
+            Log.i("FILE URI", uri);
+
             //Open TeaPreview intent with new photo
-            Intent intent = new Intent(getBaseContext(), PreviewTea.class);
+            Intent intent = new Intent(getBaseContext(), PreviewTeaActivity.class);
             intent.putExtra("EXTRA_TEA_PREVIEW_PATH", uri);
             startActivity(intent);
 

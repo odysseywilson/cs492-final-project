@@ -1,6 +1,7 @@
 package com.example.spillthetea;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -16,7 +17,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class PreviewTea extends AppCompatActivity {
+public class PreviewTeaActivity extends AppCompatActivity {
     private Uri imageFilePath;
     private ImageView imageView;
     private Bitmap imageBitmap;
@@ -39,15 +40,7 @@ public class PreviewTea extends AppCompatActivity {
         this.imageView = findViewById(R.id.tea_preview_IV);
         System.out.println("FILEPATH: " + getIntent().getStringExtra("EXTRA_TEA_PREVIEW_PATH"));
         this.imageFilePath = Uri.parse(getIntent().getStringExtra("EXTRA_TEA_PREVIEW_PATH"));
-
-        try {
-            String uriString = this.imageFilePath.toString();
-            this.imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), Uri.fromFile(new File(uriString)));
-            this.imageView.setImageBitmap(this.imageBitmap);
-        } catch (IOException e) {
-            System.out.println("Error with bitmap");
-            e.printStackTrace();
-        }
+        this.imageView.setImageURI(imageFilePath);
 
         //Caption
         this.captionEditText = findViewById(R.id.caption_ET);

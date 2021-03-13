@@ -24,7 +24,7 @@
             android:name="android.support.FILE_PROVIDER_PATHS"
             android:resource="@xml/provider_paths" />
         </provider>
-        <activity android:name=".PreviewTea"></activity>
+        <activity android:name=".PreviewTeaActivity"></activity>
         <activity android:name=".ViewTeaActivity" />
         <activity
             android:name=".MainActivity"
