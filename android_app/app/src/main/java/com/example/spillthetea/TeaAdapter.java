@@ -13,8 +13,19 @@ import java.util.ArrayList;
 public class TeaAdapter extends RecyclerView.Adapter<TeaAdapter.TeaViewHolder>{
 
     private ArrayList<TeaItem> teaItemArrayList;
+    private OnTeaItemClickedListener onTeaItemClickedListener;
 
     public TeaAdapter(){
+        this.teaItemArrayList = new ArrayList<TeaItem>();
+        notifyDataSetChanged();
+    }
+
+    public interface OnTeaItemClickedListener {
+        void onTeaItemClicked(TeaItem teaItem);
+    }
+
+    public TeaAdapter(OnTeaItemClickedListener onTeaItemClickedListener){
+        this.onTeaItemClickedListener = onTeaItemClickedListener;
         this.teaItemArrayList = new ArrayList<TeaItem>();
         notifyDataSetChanged();
     }
@@ -53,6 +64,13 @@ public class TeaAdapter extends RecyclerView.Adapter<TeaAdapter.TeaViewHolder>{
 
             this.author = (TextView) itemView.findViewById(R.id.username_tv);
             this.time = (TextView) itemView.findViewById(R.id.timestamp_tv);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onTeaItemClickedListener.onTeaItemClicked(teaItemArrayList.get(getAdapterPosition()));
+                }
+            });
 
         }
 

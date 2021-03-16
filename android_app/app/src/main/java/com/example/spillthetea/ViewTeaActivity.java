@@ -9,7 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-public class ViewTeaActivity extends AppCompatActivity {
+public class ViewTeaActivity extends AppCompatActivity
+        implements TeaAdapter.OnTeaItemClickedListener{
 
     private RecyclerView recyclerView;
     private TeaAdapter teaAdapter;
@@ -26,17 +27,20 @@ public class ViewTeaActivity extends AppCompatActivity {
         this.recyclerView = findViewById(R.id.tea_rv);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         this.recyclerView.setHasFixedSize(true);
-        this.teaAdapter = new TeaAdapter();
+        this.teaAdapter = new TeaAdapter(this);
         this.recyclerView.setAdapter(this.teaAdapter);
 
-        TeaItem tea1 = new TeaItem();
-        tea1.author = "Odyssey";
-        tea1.time = "420";
-        TeaItem tea2 = new TeaItem();
-        tea2.author = "Xander";
-        tea2.time = "420";
-        this.teaAdapter.addTea(tea1);
-        this.teaAdapter.addTea(tea2);
+        for (int i = 0; i < 5; i++){
+            TeaItem tea1 = new TeaItem();
+            tea1.author = "Odyssey";
+            tea1.time = "420";
+            TeaItem tea2 = new TeaItem();
+            tea2.author = "Xander";
+            tea2.time = "420";
+            this.teaAdapter.addTea(tea1);
+            this.teaAdapter.addTea(tea2);
+        }
+
 
         //Setup camera button
         this.toCameraButton = findViewById(R.id.to_camera_button);
@@ -57,5 +61,15 @@ public class ViewTeaActivity extends AppCompatActivity {
 
             }
         });
+
+        //Setup on specific tea clicked
+       // this.teaAdapt
+    }
+
+    @Override
+    public void onTeaItemClicked(TeaItem teaItem) {
+        Intent intent = new Intent(this, SingleTeaView.class);
+        intent.putExtra(SingleTeaView.TEA_ITEM, teaItem);
+        startActivity(intent);
     }
 }
