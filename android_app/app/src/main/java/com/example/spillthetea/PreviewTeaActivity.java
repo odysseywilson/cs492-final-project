@@ -1,26 +1,29 @@
 package com.example.spillthetea;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class PreviewTeaActivity extends AppCompatActivity {
     private Uri imageFilePath;
     private ImageView imageView;
-    private Bitmap imageBitmap;
 
     //Buttons
     private ImageButton discardTeaButton;
@@ -91,10 +94,20 @@ public class PreviewTeaActivity extends AppCompatActivity {
                 //Get caption from textview
                 captionString = captionEditText.getText().toString();
                 System.out.println("Caption: " + captionString);
+                ApiRepository apiRepository = new ApiRepository();
+
+
+                String s = imageFilePath.toString().substring(0, 8) + "/" + imageFilePath.toString().substring(8);
+                Log.d("SERVE TEA BUTTON", s);
+                File f = new File(imageFilePath.toString());
+
+                Log.d("SERVE TEA BUTTON", "after file");
+
+                RequestBody body = RequestBody.create(MediaType.parse("image/*"), f);
+
+                MultipartBody.Part image = MultipartBody.Part.createFormData("upload", f.getName(), body);
+                apiRepository.postImage("test1", "test2", image);
             }
         });
-
-
-
     }
 }
