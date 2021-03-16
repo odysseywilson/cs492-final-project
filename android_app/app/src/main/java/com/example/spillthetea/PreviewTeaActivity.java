@@ -91,6 +91,11 @@ public class PreviewTeaActivity extends AppCompatActivity {
                 //Get caption from textview
                 captionString = captionEditText.getText().toString();
                 System.out.println("Caption: " + captionString);
+
+                //TODO: Send tea to server
+
+                //Return to camera after tea has been posted
+                finish();
             }
         });
 
