@@ -11,21 +11,22 @@
  >
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/single_tea_iv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:srcCompat="@color/teal_700" />
 
-    <EditText
-        android:id="@+id/caption_ET2"
+    <TextView
+        android:id="@+id/single_tea_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="500dp"
         android:background="#99090909"
-        android:text="omg i have piping hot tea 4 my girlies"
+        android:text="="
         android:textAlignment="center"
         android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF" />
+        android:textColorHint="#FFFFFF"
+        android:textSize="18sp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/close_tea_button"
