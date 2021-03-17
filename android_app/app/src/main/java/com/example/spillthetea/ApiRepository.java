@@ -40,11 +40,11 @@ public class ApiRepository {
 
             @Override
             public void onFailure(Call call, Throwable t) {
+                Log.e("STACK TRACE", t.getMessage());
                 for(StackTraceElement s : t.getStackTrace())
                 {
-                    Log.e("STACK TRACE", s.getLineNumber() + " | " + s.getClassName() + " | " + s.getMethodName());
+                    Log.e("", "\tat " + s.getClassName() + "." + s.getMethodName() + "(" + s.getFileName() + ":" + s.getLineNumber() + ")");
                 }
-                Log.e("POST TEA", t.getMessage());
             }
         });
     }
