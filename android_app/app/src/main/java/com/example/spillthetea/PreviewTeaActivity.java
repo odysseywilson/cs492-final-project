@@ -136,6 +136,8 @@ public class PreviewTeaActivity extends AppCompatActivity {
                 MultipartBody.Part image = MultipartBody.Part.createFormData("upload", mediaFile.getName(), body);
 
                 apiRepository.postImage("test1", "test2", image);
+
+                finish();
             }
         });
 
