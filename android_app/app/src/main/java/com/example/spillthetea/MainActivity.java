@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ImageButton takePhotoButton;
     private Button viewTeaButton;
+    private ImageButton settingButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ViewTeaActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //Open settings by clicking settings button
+        this.settingButton = findViewById(R.id.to_settings_button);
+        this.settingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(intent);
             }
         });
