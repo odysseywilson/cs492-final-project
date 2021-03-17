@@ -3,6 +3,7 @@ package com.example.spillthetea;
 import android.graphics.Bitmap;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.google.gson.Gson;
@@ -23,7 +24,7 @@ public class ApiRepository {
 
     private ApiService service;
 
-    private MutableLiveData<ArrayList<TeaItem>> mTea;
+    private final MutableLiveData<ArrayList<TeaItem>> mTea = new MutableLiveData<>();
 
     public ApiRepository()
     {
@@ -58,7 +59,7 @@ public class ApiRepository {
         });
     }
 
-    public void getTea()
+    public LiveData<ArrayList<TeaItem>> getTea()
     {
         Call<ArrayList<TeaItem>> results = this.service.getAllTea();
         results.enqueue(new Callback<ArrayList<TeaItem>>() {
@@ -82,5 +83,6 @@ public class ApiRepository {
                 t.printStackTrace();
             }
         });
+        return this.mTea;
     }
 }

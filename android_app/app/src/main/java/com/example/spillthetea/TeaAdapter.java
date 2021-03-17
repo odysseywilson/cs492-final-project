@@ -52,8 +52,8 @@ public class TeaAdapter extends RecyclerView.Adapter<TeaAdapter.TeaViewHolder>{
         return this.teaItemArrayList.size();
     }
 
-    public void addTea(TeaItem teaItem){
-        this.teaItemArrayList.add(teaItem);
+    public void updateTea(ArrayList<TeaItem> teaItems){
+        this.teaItemArrayList = teaItems;
         notifyDataSetChanged();
     }
 

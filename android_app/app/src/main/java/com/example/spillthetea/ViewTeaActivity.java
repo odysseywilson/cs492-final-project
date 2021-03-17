@@ -1,25 +1,30 @@
 package com.example.spillthetea;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.util.ArrayList;
 
 public class ViewTeaActivity extends AppCompatActivity
         implements TeaAdapter.OnTeaItemClickedListener{
 
     private RecyclerView recyclerView;
     private TeaAdapter teaAdapter;
+    private TeaViewModel teaViewModel;
 
     private ImageButton refreshButton;
     private ImageButton toCameraButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +38,23 @@ public class ViewTeaActivity extends AppCompatActivity
         this.teaAdapter = new TeaAdapter(this);
         this.recyclerView.setAdapter(this.teaAdapter);
 
+        this.teaViewModel = new ViewModelProvider(this).get(TeaViewModel.class);
+
+        this.teaViewModel.getTea().observe(
+                this,
+                new Observer<ArrayList<TeaItem>>() {
+                    @Override
+                    public void onChanged(@Nullable ArrayList<TeaItem> teaItems) {
+                        for(TeaItem i : teaItems)
+                        {
+                            Log.d("TEA TEST", i.username + ": " + i.caption);
+                        }
+                        teaAdapter.updateTea(teaItems);
+                    }
+        });
+
+
+        /*
         Date date = new Date();
         long timeMilli = date.getTime();
         TeaItem teaItem1;
@@ -42,7 +64,7 @@ public class ViewTeaActivity extends AppCompatActivity
             teaItem2 = new TeaItem(23, "Xander", "lemme get that tea!", timeMilli);
             this.teaAdapter.addTea(teaItem1);
             this.teaAdapter.addTea(teaItem2);
-        }
+        }*/
 
 
         //Setup camera button
@@ -60,11 +82,11 @@ public class ViewTeaActivity extends AppCompatActivity
         this.refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Make call to server to refresh tea listing
-
+                teaViewModel.getTea();
             }
         });
 
+        teaViewModel.getTea();
     }
 
     @Override
