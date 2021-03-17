@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class ViewTeaActivity extends AppCompatActivity
         implements TeaAdapter.OnTeaItemClickedListener{
 
@@ -30,15 +33,15 @@ public class ViewTeaActivity extends AppCompatActivity
         this.teaAdapter = new TeaAdapter(this);
         this.recyclerView.setAdapter(this.teaAdapter);
 
+        Date date = new Date();
+        long timeMilli = date.getTime();
+        TeaItem teaItem1;
+        TeaItem teaItem2;
         for (int i = 0; i < 5; i++){
-            TeaItem tea1 = new TeaItem();
-            tea1.author = "Odyssey";
-            tea1.time = "420";
-            TeaItem tea2 = new TeaItem();
-            tea2.author = "Xander";
-            tea2.time = "420";
-            this.teaAdapter.addTea(tea1);
-            this.teaAdapter.addTea(tea2);
+            teaItem1 = new TeaItem(23, "Odyssey", "omg tea 4 u", timeMilli);
+            teaItem2 = new TeaItem(23, "Xander", "lemme get that tea!", timeMilli);
+            this.teaAdapter.addTea(teaItem1);
+            this.teaAdapter.addTea(teaItem2);
         }
 
 

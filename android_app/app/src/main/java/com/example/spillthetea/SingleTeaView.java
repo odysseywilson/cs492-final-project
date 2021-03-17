@@ -24,7 +24,6 @@ public class SingleTeaView extends AppCompatActivity {
         setContentView(R.layout.activity_single_tea_view);
 
         this.teaItem = (TeaItem) getIntent().getSerializableExtra(TEA_ITEM);
-        System.out.println(this.teaItem.text);
 
         //Setup close tea button
         this.closeTeaButton = findViewById(R.id.close_tea_button);

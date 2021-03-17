@@ -8,7 +8,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class TeaAdapter extends RecyclerView.Adapter<TeaAdapter.TeaViewHolder>{
 
@@ -75,8 +77,15 @@ public class TeaAdapter extends RecyclerView.Adapter<TeaAdapter.TeaViewHolder>{
         }
 
         public void bind(TeaItem teaItem){
-            this.author.setText(teaItem.author);
-            this.time.setText(teaItem.time);
+            this.author.setText(teaItem.username);
+
+            //Format timestamp into real time for textview
+            SimpleDateFormat formatter = new SimpleDateFormat("hh:mm");
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(teaItem.time);
+            String timeForTV = formatter.format(calendar.getTime());
+
+            this.time.setText(timeForTV);
         }
 
     }
