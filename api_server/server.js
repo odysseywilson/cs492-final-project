@@ -37,7 +37,7 @@ app.get("/api/tea/*", function (req, res, next) {
     );
 });
 
-app.post("/api/tea", upload.single("file"), function (req, res, next) {
+app.post("/api/tea", upload.single("upload"), function (req, res, next) {
     query0 = `INSERT INTO Posts (username, caption, time) VALUES (?, ?, ?);`;
     database.query(
         query0,
