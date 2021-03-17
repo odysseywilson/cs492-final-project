@@ -10,7 +10,7 @@ var upload = multer({ storage: storage });
 app.use(express.static(__dirname + "/public"));
 
 app.get("/api/tea", function (req, res, next) {
-    query = `SELECT id, username, time FROM Posts ORDER BY time DESC LIMIT 10;`;
+    query = `SELECT * FROM Posts ORDER BY time DESC LIMIT 10;`;
     database.query(query, function (err, rows) {
         if (err) {
             res.status(500).send("INTERNAL SERVER ERROR");
@@ -18,23 +18,6 @@ app.get("/api/tea", function (req, res, next) {
             res.status(200).json(rows);
         }
     });
-});
-
-app.get("/api/tea/*", function (req, res, next) {
-    var id = req.url.substring(req.url.lastIndexOf("/") + 1);
-
-    query = `SELECT * FROM Posts WHERE id = ?;`;
-    database.query(
-        query,
-        function (err, rows) {
-            if (err) {
-                res.status(500).send("INTERNAL SERVER ERROR");
-            } else {
-                res.status(200).json(rows);
-            }
-        },
-        [id]
-    );
 });
 
 app.post("/api/tea", upload.single("upload"), function (req, res, next) {
