@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+
+ >
+
+    <ImageView
+        android:id="@+id/single_tea_iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:srcCompat="@color/teal_700" />
+
+    <TextView
+        android:id="@+id/single_tea_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="500dp"
+        android:background="#99090909"
+        android:text="omg i have some hot tea 4 u girliesssss"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textSize="18sp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/close_tea_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:clickable="true"
+        app:backgroundTint="#2196F3"
+        app:fabCustomSize="50dp"
+        app:srcCompat="@drawable/ic_discard_photo" />
+</FrameLayout>
