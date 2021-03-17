@@ -62,8 +62,6 @@ public class ViewTeaActivity extends AppCompatActivity
             }
         });
 
-        //Setup on specific tea clicked
-       // this.teaAdapt
     }
 
     @Override
