@@ -54,19 +54,6 @@ public class ViewTeaActivity extends AppCompatActivity
         });
 
 
-        /*
-        Date date = new Date();
-        long timeMilli = date.getTime();
-        TeaItem teaItem1;
-        TeaItem teaItem2;
-        for (int i = 0; i < 5; i++){
-            teaItem1 = new TeaItem(23, "Odyssey", "omg tea 4 u", timeMilli);
-            teaItem2 = new TeaItem(23, "Xander", "lemme get that tea!", timeMilli);
-            this.teaAdapter.addTea(teaItem1);
-            this.teaAdapter.addTea(teaItem2);
-        }*/
-
-
         //Setup camera button
         this.toCameraButton = findViewById(R.id.to_camera_button);
         this.toCameraButton.setOnClickListener(new View.OnClickListener() {

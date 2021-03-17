@@ -73,7 +73,7 @@ public class PreviewTeaActivity extends AppCompatActivity implements SharedPrefe
         //Menu buttons
         this.discardTeaButton = findViewById(R.id.discard_tea_button);
         this.snapchatButton = findViewById(R.id.snapchat_button);
-        this.addCaptionButton = findViewById(R.id.add_caption_button);
+        //this.addCaptionButton = findViewById(R.id.add_caption_button);
         this.serveTeaButton = findViewById(R.id.serve_tea_button);
 
         this.discardTeaButton.setOnClickListener(new View.OnClickListener() {

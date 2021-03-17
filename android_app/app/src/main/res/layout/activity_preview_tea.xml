@@ -27,12 +27,12 @@
             android:layout_weight="1"
             app:srcCompat="@drawable/ic_share" />
 
-        <ImageButton
+        <!--<ImageButton
             android:id="@+id/add_caption_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ic_add_caption" />
+            app:srcCompat="@drawable/ic_add_caption" />-->
 
         <ImageButton
             android:id="@+id/serve_tea_button"
