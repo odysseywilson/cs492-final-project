@@ -1,26 +1,38 @@
 package com.example.spillthetea;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class PreviewTeaActivity extends AppCompatActivity {
     private Uri imageFilePath;
     private ImageView imageView;
-    private Bitmap imageBitmap;
 
     //Buttons
     private ImageButton discardTeaButton;
@@ -91,14 +103,43 @@ public class PreviewTeaActivity extends AppCompatActivity {
                 //Get caption from textview
                 captionString = captionEditText.getText().toString();
                 System.out.println("Caption: " + captionString);
+                ApiRepository apiRepository = new ApiRepository();
 
-                //TODO: Send tea to server
+                // evil workaround for file not working
+                File dir = new File(
+                        Environment
+                                .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                        "SpillTheTea");
 
-                //Return to camera after tea has been posted
+                long timestamp = System.currentTimeMillis();
+                File mediaFile;
+                mediaFile = new File(dir.getPath() + File.separator
+                        + "IMG_" + timestamp + ".jpg");
+
+                try {
+                    InputStream inputStream = getContentResolver().openInputStream(imageFilePath);
+                    OutputStream outputStream = new FileOutputStream(mediaFile);
+                    byte[] buf = new byte[1024];
+                    int len;
+                    while((len=inputStream.read(buf))>0){
+                        outputStream.write(buf,0,len);
+                    }
+                    outputStream.close();
+                    inputStream.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                RequestBody body = RequestBody.create(MediaType.parse("multipart/form-data"), mediaFile);
+                MultipartBody.Part image = MultipartBody.Part.createFormData("upload", mediaFile.getName(), body);
+
+                apiRepository.postImage("test1", "test2", image);
+
                 finish();
             }
         });
-
 
 
     }
