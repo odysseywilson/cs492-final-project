@@ -98,12 +98,12 @@ public class PreviewTeaActivity extends AppCompatActivity implements SharedPrefe
             }
         });
 
-        this.addCaptionButton.setOnClickListener(new View.OnClickListener() {
+       /* this.addCaptionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
-        });
+        });*/
 
         this.serveTeaButton.setOnClickListener(new View.OnClickListener() {
             @Override
