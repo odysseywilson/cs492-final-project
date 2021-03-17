@@ -1,8 +1,10 @@
 package com.example.spillthetea;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -30,7 +32,7 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
-public class PreviewTeaActivity extends AppCompatActivity {
+public class PreviewTeaActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener{
     private Uri imageFilePath;
     private ImageView imageView;
 
@@ -43,10 +45,16 @@ public class PreviewTeaActivity extends AppCompatActivity {
     private EditText captionEditText;
     private String captionString;
 
+    private String username;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preview_tea);
+
+        //Setup access to shared preferences and set username
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        this.username = sharedPreferences.getString("username", "USERNAME_ERROR");
 
         //Get image Uri from MainActivity and render image as bitmap
         this.imageView = findViewById(R.id.tea_preview_IV);
@@ -102,7 +110,7 @@ public class PreviewTeaActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Get caption from textview
                 captionString = captionEditText.getText().toString();
-                System.out.println("Caption: " + captionString);
+
                 ApiRepository apiRepository = new ApiRepository();
 
                 // evil workaround for file not working
@@ -135,12 +143,18 @@ public class PreviewTeaActivity extends AppCompatActivity {
                 RequestBody body = RequestBody.create(MediaType.parse("multipart/form-data"), mediaFile);
                 MultipartBody.Part image = MultipartBody.Part.createFormData("upload", mediaFile.getName(), body);
 
-                apiRepository.postImage("test1", "test2", image);
+                apiRepository.postImage(username, captionString, image);
 
                 finish();
             }
         });
 
 
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        // Update username if changed in settings
+        this.username = sharedPreferences.getString(key, "USERNAME_ERROR");
     }
 }
